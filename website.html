@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Museum of Music Eras</title>
+  <style>
+    @font-face {
+      font-family: 'Troglo';
+      src: url('TROGLOP_.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Moodern';
+      src: url('MOODERN.otf') format('opentype');
+    }
+
+    @font-face {
+      font-family: 'RefreshingScript';
+      src: url('a_refreshing_script_by_dledeviant_ddq8izf.ttf') format('truetype');
+    }
+
+    @font-face {
+      font-family: 'Handwritten';
+      src: url('handwritten.ttf') format('truetype');
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .full-page-header {
+      background-image: url('HEADING1.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .lifestyle-section {
+      position: relative;
+      padding: 50px 20px;
+      text-align: center;
+      background-color: #181818;
+      color: #fff;
+    }
+
+    .lifestyle-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .lifestyle-section p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 20px;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .rotating-vinyl {
+      position: absolute;
+      top: 100px; /* Adjusted to match the red circle */
+      left: 50px; /* Adjusted to match the red circle */
+      width: 150px;
+      height: 150px;
+      animation: spin 10s linear infinite;
+      z-index: 1;
+      transform-origin: center;
+      opacity: 0.8;
+      cursor: pointer;
+    }
+    .rotating-airmax {
+  position: absolute;
+  top: 300px;
+  right: 50px;
+  width: 150px;
+  height: 150px;
+  rotate: 30deg;
+  z-index: 1;
+  transform-origin: center;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.rotating-ipod {
+  position: absolute;
+      top: 500px; /* Adjusted to match the red circle */
+      left: 50px; /* Adjusted to match the red circle */
+      width: 150px;
+      height: 150px;
+      rotate: -20deg;
+      z-index: 1;
+      transform-origin: center;
+      opacity: 0.8;
+      cursor: pointer;
+}
+
+.click-here-y2k {
+  position: absolute;
+      top: 468px;
+      left: 60px;
+      font-family: 'Handwritten', cursive;
+      font-size: 1rem;
+      color: #fff;
+      transform: rotate(-10deg);
+      z-index: 2;
+    }
+
+
+.click-here-modern {
+  position: absolute;
+  top: 275px;
+  right: 70px;
+  font-family: 'Handwritten', cursive;
+  font-size: 1rem;
+  color: #fff;
+  transform: rotate(10deg);
+  z-index: 2;
+}
+
+    .click-here {
+      position: absolute;
+      top: 80px;
+      left: 80px;
+      font-family: 'Handwritten', cursive;
+      font-size: 1rem;
+      color: #fff;
+      transform: rotate(-10deg);
+      z-index: 2;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 40px;
+      left: 80px;
+      width: 30px;
+      height: 30px;
+      background: url('arrow.png') no-repeat center center;
+      background-size: contain;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .horizontal-scroll-container {
+    display: flex;
+    overflow-x: auto;  /* Enable horizontal scroll */
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    height: 100vh;
+    overflow-y: hidden; /* Disable vertical scroll inside this container */
+  }
+
+    .era-section {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px;
+      color: #fff;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .era-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      max-width: 800px;
+    }
+
+    /* Ensure all sections are hidden by default */
+.content-section {
+    display: none;
+}
+
+/* Optional: Style for the navigation buttons */
+/* Custom back/next button style */
+/* Custom back/next button style */
+/* Positioning for the navigation buttons */
+/* Add these styles to ensure the buttons are always visible */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between; /* Space out buttons between the sides */
+  position: absolute;
+  top: 50%; /* Position closer to the bottom of the popup */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  width: 100%;
+  padding: 0 50px; /* Adjust padding for spacing from edges */
+}
+
+.nav-button {
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin: 0; /* Remove any extra margin */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+
+.nav-button:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+/* Make sure buttons are aligned correctly and visible */
+#back-button, #next-button {
+  display: inline-block;
+  opacity: 1; /* Ensure both buttons are visible */
+}
+
+#back-button.hidden {
+  opacity: 0.3; /* Make back button visually disabled */
+  cursor: not-allowed; /* Optional: prevent interaction */
+}
+
+#next-button.hidden {
+  opacity: 0.3; /* Make next button visually disabled */
+  cursor: not-allowed; /* Optional: prevent interaction */
+}
+
+
+
+
+
+
+
+
+    #retro {
+      background-image: url('retro1.jpg');
+    }
+
+    #y2k {
+      background-image: url('y2k.jpg');
+    }
+
+    #modern {
+      background-image: url('modern.jpg');
+    }
+
+    #retro h2 {
+      font-family: 'RefreshingScript';
+      font-size: 10rem;
+    }
+
+    #y2k h2 {
+      font-family: 'Troglo';
+      font-size: 8.5rem;
+    }
+
+    #modern h2 {
+      font-family: 'Moodern';
+      font-size: 8.5rem;
+    }
+
+    .era-section p {
+      font-size: 1.4rem;
+      line-height: 1.8;
+    }
+
+    .quiz-section {
+      padding: 50px 20px;
+      background: linear-gradient(135deg, #333, #555);
+      color: #fff;
+      text-align: center;
+    }
+
+    .quiz-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .quiz-title {
+      font-size: 2.5rem;
+      font-family: 'Troglo', sans-serif;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .quiz-question {
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 30px;
+      color: #ddd;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .quiz-button {
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #444, #666);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .quiz-button:hover {
+      background: linear-gradient(135deg, #666, #888);
+      transform: scale(1.05);
+    }
+    body.quiz-active {
+  overflow: hidden;
+  height: 100%;
+}
+
+
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #fff;
+    }
+
+    /* Popup Styles */
+    .popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 700px; /* You can adjust this if needed */
+  background-color: #242424;
+  color: #fff;
+  padding: 30px 60px 30px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+  display: none;
+  text-align: center;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.popup h2 {
+  font-size: 2rem;
+  font-family: 'Moodern', sans-serif;
+  margin-bottom: 15px;
+}
+
+.popup p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  padding: 10px 30px; /* Added padding around the text */
+  text-align: center;
+}
+
+.close-btn {
+  padding: 12px 25px;
+  background-color: #ff4747;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.close-btn:hover {
+  background-color: #ff6363;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  z-index: 9;
+}
+
+    .minimal-navbar {
+  display: flex;
+  justify-content: center;
+  background-color: #3b3b3b; /* Dark background */
+  padding: 10px 0;
+  position: fixed; /* Fixed positioning */
+  width: 100%; /* Full width */
+  top: 0; /* Stays at the top */
+  z-index: 100; /* Stays above other content */
+}
+
+.minimal-navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px; /* Spacing between nav items */
+  margin: 0;
+  padding: 0;
+}
+
+.minimal-navbar ul li {
+  display: inline-block;
+}
+
+.minimal-navbar ul li a {
+  text-decoration: none;
+  color: #ffffff; /* White text */
+  font-size: 1rem;
+  font-family: 'Moodern', sans-serif; /* Matches your aesthetic */
+  text-transform: uppercase; /* Uppercase text for nav links */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.minimal-navbar ul li a:hover {
+  color: #c0c0c0; /* Light gray hover effect */
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <header class="full-page-header">
+    <nav class="minimal-navbar">
+      <ul>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#retro">RETRO</a></li>
+        <li><a href="#y2k">Y2K</a></li>
+        <li><a href="#modern">MODERN</a></li>
+        <li><a href="#quiz-container">QUIZ</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="about" class="lifestyle-section">
+
+    <img src="vinyl.png" alt="Vinyl Record" class="rotating-vinyl" onclick="showPopup('retro')">
+<div class="click-here">Click Here</div>
+
+<img src="airmax.png" alt="Apple AirPods Max" class="rotating-airmax" onclick="showPopup('modern')">
+<div class="click-here-modern">Click Here</div>
+
+<img src="ipod.png" alt="iPod" class="rotating-ipod" onclick="showPopup('y2k')">
+<div class="click-here-y2k">Click Here</div>
+
+    <div class="arrow"></div>
+    <h2>Music as a Lifestyle</h2>
+    <p>
+      Music isn’t just background noise; it’s woven into the very fabric of our daily lives. It sets the tone for every moment, from the upbeat playlist that gets us pumped for a morning run to the soulful tunes that help us unwind after a long day. Music captures the essence of our emotions, making joy feel brighter and even heartbreak a little poetic.
+    </p>
+    <p>
+      Think about how a song can transport you back to a specific memory—dancing with friends at a summer festival, singing along in the car on a late-night road trip, or feeling the raw energy of your favorite band live on stage. Music isn’t just something we consume; it’s a companion, shaping how we experience the world around us.
+    </p>
+    <p>
+      Beyond moods and memories, music even inspires how we express ourselves. From the edgy style of rock enthusiasts to the laid-back vibes of reggae fans, it seeps into fashion, art, and the way we connect with others. It’s not just a hobby; it’s a lifestyle—a universal language that brings people together and helps us tell our stories without saying a word.
+    </p>
+    <p>
+      So whether it’s the beat that drives your step or the lyrics that echo your feelings, music isn’t just something we listen to. It’s a force that moves us, connects us, and defines who we are.
+    </p>
+  </section>
+
+  <div class="horizontal-scroll-container">
+    <section class="era-section" id="retro">
+      <div class="content">
+        <h2>Retro Era</h2>
+        <p>Step back into the time of vinyl records, groovy beats, and vibrant aesthetics.</p>
+        <audio controls>
+          <source src="retro_song.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        
+        <!-- Spotify button for Retro Era -->
+        <div class="spotify-button-container">
+          <a href="https://open.spotify.com/playlist/5PCp9jxzOykV83FOHmjtzT?si=GwmN7QXJS3icRlIwqLVdaQ" target="_blank">
+            <img src="spotify 1.png" alt="Spotify Playlist for Retro" class="spotify-button spotify-button-1">
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="era-section" id="y2k">
+      <div class="content">
+        <h2>Y2K</h2>
+        <p>Experience the iconic sounds of the 2000s.</p>
+        <audio controls>
+          <source src="y2k_song.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+    
+        <!-- Spotify button for Y2K Era -->
+        <div class="spotify-button-container">
+          <a href="https://open.spotify.com/playlist/3ISuIOcQAgWeru2O23cUp8?si=3Ab1BvgYSdOQTLmeYLlx1Q" target="_blank">
+            <img src="spotify 2.png" alt="Spotify Playlist for Y2K" class="spotify-button spotify-button-2">
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <section class="era-section" id="modern">
+      <div class="content">
+        <h2>Modern Era</h2>
+        <p>Explore the music of today, where genres blur and streaming platforms redefine the industry.</p>
+        <audio controls>
+          <source src="modern_song.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+    
+        <!-- Spotify button for Modern Era -->
+        <div class="spotify-button-container">
+          <a href="https://open.spotify.com/playlist/44QFaOZA3bzJPwuDlcV3Gp?si=fqUNVlInRuWYNeG_urJlGA" target="_blank">
+            <img src="spotify 3.png" alt="Spotify Playlist for Modern" class="spotify-button spotify-button-3">
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <style>
+      /* General Style for the Spotify Buttons */
+      .spotify-button {
+        width: 60px; /* Adjust the size */
+        height: 60px; /* Adjust the size */
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+    
+      .spotify-button:hover {
+        transform: scale(1.1); /* Slight zoom effect on hover */
+      }
+    
+      /* Style for Spotify Button 1 - Positioned for Retro Page */
+      .spotify-button-1 {
+        position: absolute;
+        top: -20%;  /* Adjust this position to fit better */
+        right: -30%;  /* Position it near the top right */
+        z-index: 100; /* Ensures it's on top of other elements */
+      }
+    
+      /* Style for Spotify Button 2 - Positioned for Y2K Page */
+      .spotify-button-2 {
+        position: absolute;
+        top: -28%;  /* Adjust this position to fit better */
+        right: -70%;  /* Position it near the top right */
+        z-index: 100;
+      }
+    
+      /* Style for Spotify Button 3 - Positioned for Modern Page */
+      .spotify-button-3 {
+        position: absolute;
+        top: -20%;  /* Adjust this position to fit better */
+        right: -20%;  /* Position it near the top right */
+        z-index: 100;
+      }
+    </style>
+    
+    
+</div>
+
+    
+    
+
+  <section class="quiz-section" id="quiz-container">
+    <div class="quiz-wrapper">
+      <h2 class="quiz-title">Test Your Knowledge</h2>
+      <p class="quiz-question" id="question-text">Which era popularized vinyl records?</p>
+      <div class="quiz-options" id="quiz-options">
+        <button class="quiz-button">Retro</button>
+        <button class="quiz-button">Y2K</button>
+        <button class="quiz-button">Modern</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2024 Art Museum of Music Eras. All rights reserved.</p>
+  </footer>
+
+  <div class="overlay" id="overlay" onclick="hidePopup()"></div>
+  <!-- Popup for the selected Era (Retro, Y2K, Modern) -->
+<div class="popup" id="popup">
+  <h2>Era Information</h2>
+
+  <!-- Content for Retro Era -->
+  <div id="retro-era" class="content-section">
+    <h3>Retro Era (1950s-1980s)</h3>
+
+    <!-- Display sections (Lifestyle, Music Devices, Fashion) one at a time -->
+    <div id="retro-lifestyle">
+      <h4>Music as a Lifestyle</h4>
+      <p>The retro era was a time when music wasn’t just heard—it was lived. Genres like rock ‘n’ roll, disco, and funk defined cultural movements and became rallying cries for change. Music shaped identities, from the rebellious rockers of the 1950s to the free-spirited disco lovers of the 1970s. It brought people together at concerts, record stores, and street corners, creating communities built around shared soundtracks.</p>
+    </div>
+    
+    <div id="retro-devices" style="display: none;">
+      <h4>Music Devices</h4>
+      <p>Vinyl records were the heart of the retro era. People curated collections of their favorite albums, and record players were prized possessions. In the 1970s and 80s, boomboxes emerged as portable symbols of music’s power, turning sidewalks and skate parks into instant parties. The retro devices encouraged a shared listening experience that emphasized connection and physical interaction with music.</p>
+    </div>
+
+    <div id="retro-fashion" style="display: none;">
+      <h4>Fashion Influences</h4>
+      <p>Retro music devices inspired bold and expressive fashion. Bell-bottoms, leather jackets, and tie-dye patterns reflected the era's love for individuality and rebellion. Disco’s glittering outfits mirrored the vibrant energy of the music, while punk’s ripped jeans and studded jackets channeled its raw edge. Accessories like bandanas, sunglasses, and platform shoes completed looks influenced by iconic music styles.</p>
+    </div>
+  </div>
+
+  <!-- Content for Y2K Era -->
+  <div id="y2k-era" class="content-section" style="display: none;">
+    <h3>Y2K Era (1990s-2000s)</h3>
+
+    <!-- Display sections (Lifestyle, Music Devices, Fashion) one at a time -->
+    <div id="y2k-lifestyle">
+      <h4>Music as a Lifestyle</h4>
+      <p>The Y2K era was a period of transition, with music becoming more personal and portable. People identified with specific genres like pop-punk, hip-hop, or electronic music, and their tastes became a core part of their identities. Music was integrated into daily life, from custom playlists on burned CDs to shared earbuds during commutes.</p>
+    </div>
+    
+    <div id="y2k-devices" style="display: none;">
+      <h4>Music Devices</h4>
+      <p>The shift from CDs to MP3 players revolutionized how people consumed music. CD players were portable but required stacks of discs, while MP3 players like the iPod made it possible to carry thousands of songs in a sleek device. These advancements allowed for more personal listening experiences, empowering individuals to curate their soundtracks on the go.</p>
+    </div>
+
+    <div id="y2k-fashion" style="display: none;">
+      <h4>Fashion Influences</h4>
+      <p>Music’s evolution inspired Y2K’s futuristic yet playful fashion trends. Metallic fabrics, holographic accessories, and vibrant colors dominated wardrobes. Band merch, graphic tees, and colorful bracelets showed off musical tastes. Subcultures like emo and hip-hop defined their own unique styles, from skinny jeans and studded belts to oversized jerseys and gold chains.</p>
+    </div>
+  </div>
+
+  <!-- Content for Modern Era -->
+  <div id="modern-era" class="content-section" style="display: none;">
+    <h3>Modern Era (2010s-Present)</h3>
+
+    <!-- Display sections (Lifestyle, Music Devices, Fashion) one at a time -->
+    <div id="modern-lifestyle">
+      <h4>Music as a Lifestyle</h4>
+      <p>Today, music is omnipresent, thanks to streaming platforms and smart technology. It’s seamlessly woven into every aspect of life, with personalized playlists for work, workouts, and relaxation. Music is both hyper-personal and globally shared, with viral hits uniting millions across social media. It’s a constant companion, shaping moods and daily routines.</p>
+    </div>
+    
+    <div id="modern-devices" style="display: none;">
+      <h4>Music Devices</h4>
+      <p>Smartphones are the all-in-one music hubs of the modern era, supported by streaming platforms like Spotify and Apple Music. Wireless headphones, like AirPods, and smart speakers offer seamless access to music anytime, anywhere. Music devices are now as much about style as functionality, reflecting minimalist, high-tech aesthetics.</p>
+    </div>
+
+    <div id="modern-fashion" style="display: none;">
+      <h4>Fashion Influences</h4>
+      <p>Modern music consumption has fueled sleek, tech-forward fashion. Athleisure, clean cuts, and neutral palettes dominate the scene, reflecting a focus on ease and adaptability. Music festivals like Coachella inspire eclectic, bohemian styles, blending vintage and contemporary influences. Oversized band merch and retro throwbacks are modern nods to the timeless connection between music and fashion.</p>
+    </div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <!-- Navigation Buttons -->
+<nav class="navigation-buttons">
+  <img src="back.png" alt="Back" id="back-button" class="nav-button" onclick="navigate('back')">
+  <img src="next.png" alt="Next" id="next-button" class="nav-button" onclick="navigate('next')">
+</nav>
+
+
+  <button class="close-btn" onclick="hidePopup()">Close</button>
+</div>
+
+  
+
+  <script>
+  const questions = [
+    { question: "Which era popularized vinyl records as a way to listen to music at home?", options: ["Retro", "Y2K", "Modern"], answer: "Retro" },
+    { question: "Which era is known for the Walkman revolutionizing portable music?", options: ["Retro", "Y2K", "Modern"], answer: "Retro" },
+    { question: "Which era is famous for glittery tracksuits and crop tops inspired by pop stars?", options: ["Retro", "Y2K", "Modern"], answer: "Y2K" },
+    { question: "Which era popularized Apple AirPods Max headphones as a fashion statement?", options: ["Retro", "Y2K", "Modern"], answer: "Modern" },
+    { question: "Which era introduced streaming platforms like Spotify and YouTube Music?", options: ["Retro", "Y2K", "Modern"], answer: "Modern" },
+    { question: "Which era is known for cassette tapes and boomboxes as must-have devices?", options: ["Retro", "Y2K", "Modern"], answer: "Retro" },
+    { question: "Which era is characterized by hip-hop influencing baggy jeans and streetwear?", options: ["Retro", "Y2K", "Modern"], answer: "Y2K" },
+    { question: "Which era saw the revival of vinyl records as a collectible lifestyle item?", options: ["Retro", "Y2K", "Modern"], answer: "Modern" },
+    { question: "Which era is defined by TikTok influencing music trends and dance challenges?", options: ["Retro", "Y2K", "Modern"], answer: "Modern" },
+    { question: "Which era popularized butterfly clips and platform sneakers in music videos?", options: ["Retro", "Y2K", "Modern"], answer: "Y2K" },
+  ];
+
+  let currentQuestionIndex = 0;
+  let score = 0;
+
+  const questionText = document.getElementById("question-text");
+  const quizOptions = document.getElementById("quiz-options");
+
+  function loadQuestion() {
+    const currentQuestion = questions[currentQuestionIndex];
+    questionText.textContent = currentQuestion.question;
+
+    quizOptions.innerHTML = ""; // Clear previous options
+    currentQuestion.options.forEach((option) => {
+      const button = document.createElement("button");
+      button.classList.add("quiz-button");
+      button.textContent = option;
+      button.onclick = () => checkAnswer(option);
+      quizOptions.appendChild(button);
+    });
+  }
+
+  function checkAnswer(selectedOption) {
+    const currentQuestion = questions[currentQuestionIndex];
+    const feedbackButton = document.createElement("button");
+
+    feedbackButton.classList.add("feedback-button");
+    feedbackButton.style.position = "fixed";
+    feedbackButton.style.top = "50%";
+    feedbackButton.style.left = "50%";
+    feedbackButton.style.transform = "translate(-50%, -50%)";
+    feedbackButton.style.padding = "20px 40px";
+    feedbackButton.style.fontSize = "1.5rem";
+    feedbackButton.style.border = "none";
+    feedbackButton.style.borderRadius = "10px";
+    feedbackButton.style.cursor = "pointer";
+    feedbackButton.style.zIndex = "1000";
+    feedbackButton.style.backgroundColor = "#000";
+    feedbackButton.style.color = "#fff";
+    feedbackButton.style.boxShadow = "0px 0px 20px rgba(255, 255, 255, 0.6)";
+    feedbackButton.style.transition = "all 0.3s ease";
+
+    if (selectedOption === currentQuestion.answer) {
+      feedbackButton.textContent = "Correct!";
+      score++;
+    } else {
+      feedbackButton.textContent = `Incorrect! The correct answer is ${currentQuestion.answer}.`;
+    }
+
+    document.body.appendChild(feedbackButton);
+
+    // Remove the feedback button after 2 seconds and load the next question
+    setTimeout(() => {
+      document.body.removeChild(feedbackButton);
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+      } else {
+        showResults();
+      }
+    }, 2000);
+  }
+
+  function showResults() {
+    const container = document.getElementById("quiz-container");
+    let feedbackMessage;
+
+    if (score === 10) {
+      feedbackMessage = "Wow, you’re a true music lifestyle expert! You really know your eras!";
+    } else if (score >= 7) {
+      feedbackMessage = "Great job! You’ve got a solid understanding of music and lifestyle trends.";
+    } else if (score >= 4) {
+      feedbackMessage = "Not bad! You're almost there, but there’s room to brush up on your music lifestyle knowledge.";
+    } else {
+      feedbackMessage = "Looks like you need to relearn your info! Dive into music history and culture and give it another go.";
+    }
+
+    container.innerHTML = `
+      <div class="quiz-wrapper">
+        <h2 class="quiz-title">Your Results</h2>
+        <p class="quiz-question">You got ${score} out of ${questions.length} correct!</p>
+        <p class="quiz-question">${feedbackMessage}</p>
+      </div>
+    `;
+  }
+
+  // Load the first question on page load
+  loadQuestion();
+
+  let currentEra = "";
+  let currentSection = 0; // 0: Lifestyle, 1: Devices, 2: Fashion
+
+  // Function to show the popup with corresponding era content
+  function showPopup(era) {
+    const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
+
+    // Show the popup and overlay
+    popup.style.display = "block";
+    overlay.style.display = "block";
+
+    currentEra = era; // Save selected era
+    currentSection = 0; // Start at the first section (Lifestyle)
+
+    // Show the content for the selected era
+    showEraContent(era);
+    updateNavigationButtons();
+  }
+
+  // Show the content for the selected era
+  function showEraContent(era) {
+    // Hide all sections
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => section.style.display = 'none');
+
+    // Display the selected era section
+    document.getElementById(`${era}-era`).style.display = 'block';
+
+    // Show only the current section for the selected era
+    const sectionIds = ['lifestyle', 'devices', 'fashion'];
+    sectionIds.forEach((section, index) => {
+      if (index === currentSection) {
+        document.getElementById(`${era}-${section}`).style.display = 'block';
+      } else {
+        document.getElementById(`${era}-${section}`).style.display = 'none';
+      }
+    });
+  }
+
+  // Navigate between sections (Back/Next)
+  function navigate(direction) {
+    if (direction === 'next') {
+      if (currentSection < 2) {
+        currentSection++;
+      }
+    } else if (direction === 'back') {
+      if (currentSection > 0) {
+        currentSection--;
+      }
+    }
+
+    // Update the displayed section
+    showEraContent(currentEra);
+    updateNavigationButtons();
+  }
+
+  // Update visibility of navigation buttons
+  // Update visibility of navigation buttons
+function updateNavigationButtons() {
+  const backButton = document.getElementById("back-button");
+  const nextButton = document.getElementById("next-button");
+
+  // Show or hide the back button based on the current section
+  if (currentSection === 0) {
+    backButton.classList.add('hidden'); // Hide the back button when on the first section
+  } else {
+    backButton.classList.remove('hidden'); // Show the back button otherwise
+  }
+
+  // Show or hide the next button based on the current section
+  if (currentSection === 2) {
+    nextButton.classList.add('hidden'); // Hide the next button on the last section
+  } else {
+    nextButton.classList.remove('hidden'); // Show the next button otherwise
+  }
+}
+
+
+  // Close the popup
+  function hidePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
