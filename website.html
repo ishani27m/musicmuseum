@@ -446,7 +446,19 @@
   color: #c0c0c0; /* Light gray hover effect */
 }
 
+@media (min-width: 768px) {
+    .resources-page .content-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+}
 
+@media (min-width: 1024px) {
+    .resources-page .content-section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 
 
 
